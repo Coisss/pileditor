@@ -106,18 +106,18 @@ list_images = QListWidget()
 lb_image = QLabel('Изображение')
 
 left_btn = QPushButton("Повернуть влево")
-left_btn.setIcon(QIcon(PATH + 'rotate_left_icon.png'))
+left_btn.setIcon(QIcon(PATH + 'rotate_left_icon.png')) # Add rotate left icon
 right_btn = QPushButton("Повернуть вправо")
-right_btn.setIcon(QIcon(PATH + 'rotate_right_icon.png')) 
+right_btn.setIcon(QIcon(PATH + 'rotate_right_icon.png')) # Add rotate right icon
 mirror_btn = QPushButton("Отзеркалить")
-mirror_btn.setIcon(QIcon(PATH + 'mirror_icon.png')) 
+mirror_btn.setIcon(QIcon(PATH + 'mirror_icon.png')) # Add mirror icon
 sharp_btn = QPushButton("Острота")
-sharp_btn.setIcon(QIcon(PATH + 'sharpen_icon.png')) 
+sharp_btn.setIcon(QIcon(PATH + 'sharpen_icon.png')) # Add sharpen icon
 L_btn = QPushButton("Ч/Б")
-L_btn.setIcon(QIcon(PATH + 'grayscale_icon.png')) 
+L_btn.setIcon(QIcon(PATH + 'grayscale_icon.png')) # Add grayscale icon
 
 save_btn = QPushButton("Сохранить")
-save_btn.setIcon(QIcon(PATH + 'save_icon.png'))
+save_btn.setIcon(QIcon(PATH + 'save_icon.png')) # Add save icon
 
 workdir = None
 
@@ -156,6 +156,38 @@ main_layout.addLayout(image_list_layout, 20)
 main_layout.addLayout(control_panel_layout, 80)
 
 window.setLayout(main_layout)
+
+# Adding styles
+window.setStyleSheet("""
+    QWidget {
+        border: 2px solid #354152;
+        border-radius: 10px;
+        background-color: #f0f0f0;
+    }
+    
+    QPushButton {
+        border: none;
+        border-radius: 5px;
+        background-color: #5e6c84;
+        color: white;
+        padding: 8px 16px;
+    }
+
+    QPushButton:hover {
+        background-color: #7289da;
+    }
+
+    QListWidget {
+        border: 2px solid #354152;
+        border-radius: 5px;
+    }
+
+    QLabel {
+        border: 2px solid #354152;
+        border-radius: 5px;
+        background-color: white;
+    }
+""")
 
 window.show()
 

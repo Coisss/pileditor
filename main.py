@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QListWid
 from PyQt5.QtGui import QPixmap
 from PIL import Image, ImageFilter
 import os
+import uuid
 
 workdir = None
 
@@ -32,36 +33,36 @@ class ImageProcessor():
     
     def LeftImage(self):
         pic_left = self.image.transpose(Image.ROTATE_90)
-        #Нужно использовать реальное название
-        NewPATH = PATH + self.foldername + os.sep + 'ggg.png'
+        unique_filename = str(uuid.uuid4()) + '.png'
+        NewPATH = os.path.join(PATH, self.foldername, unique_filename)
         pic_left.save(NewPATH)
         self.showRedactedImage(NewPATH)
 
     def RightImage(self):
         pic_right = self.image.transpose(Image.ROTATE_180)
-        #Нужно использовать реальное название
-        NewPATH = PATH + self.foldername + os.sep + 'ggg.png'
+        unique_filename = str(uuid.uuid4()) + '.png'
+        NewPATH = os.path.join(PATH, self.foldername, unique_filename)
         pic_right.save(NewPATH)
         self.showRedactedImage(NewPATH)
 
     def MirrorImage(self):
         pic_mirror = self.image.transpose(Image.FLIP_LEFT_RIGHT)
-        #Нужно использовать реальное название
-        NewPATH = PATH + self.foldername + os.sep + 'ggg.png'
+        unique_filename = str(uuid.uuid4()) + '.png'
+        NewPATH = os.path.join(PATH, self.foldername, unique_filename)
         pic_mirror.save(NewPATH)
         self.showRedactedImage(NewPATH)
 
     def SharpImage(self):
         pic_sharp = self.image.filter(ImageFilter.BLUR)
-        #Нужно использовать реальное название
-        NewPATH = PATH + self.foldername + os.sep + 'ggg.png'
+        unique_filename = str(uuid.uuid4()) + '.png'
+        NewPATH = os.path.join(PATH, self.foldername, unique_filename)
         pic_sharp.save(NewPATH)
         self.showRedactedImage(NewPATH)
 
     def ImageGray(self):
         pic_gray = self.image.convert("L")
-        #Нужно использовать реальное название
-        NewPATH = PATH + self.foldername + os.sep + 'ggg.png'
+        unique_filename = str(uuid.uuid4()) + '.png'
+        NewPATH = os.path.join(PATH, self.foldername, unique_filename)
         pic_gray.save(NewPATH)
         self.showRedactedImage(NewPATH)
 
@@ -82,12 +83,11 @@ class ImageProcessor():
 def filterImage(files, extensions):
     result = list()
     for file in files:
-        
         r = file.split(".")
-        if r[1] in extensions:
+        if len(r) >= 2 and r[1] in extensions:
             result.append(file)
-
     return result
+
 
 def chooseWorkdir():
     global workdir
